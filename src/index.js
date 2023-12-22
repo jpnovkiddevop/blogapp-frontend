@@ -1,13 +1,29 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
+import App from "./components/App";
 import reportWebVitals from './reportWebVitals';
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import Login from "./components/Login";
+import { CookiesProvider } from "react-cookie"; // Corrected the import
+
+function AppRoutes() {
+  return (
+    <CookiesProvider>
+      <Routes>
+        <Route exact path="/" element={<Login />} />
+        <Route exact path="/articles" element={<App />} />
+      </Routes>
+    </CookiesProvider>
+  );
+}
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <Router>
+      <AppRoutes />
+    </Router>
   </React.StrictMode>
 );
 
